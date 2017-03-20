@@ -19,7 +19,7 @@ public class PpapServiceApplication {
 	}
 
 	@RequestMapping(path = "/")
-	String hello() {
-		return "hello @" + id;
+	String ppap() {
+		return "ppap-service @" + id;
 	}
 }

@@ -14,18 +14,38 @@
 /*<![CDATA[*/
 	$(document).ready(function(){
 		$("#ppap_btn").click(function(){
-			// fragment(html)取得
 			$.ajax({
 				type : "GET",
 				url : "ajax/ppap",
 				dataType : "json",
+				contentType: 'application/json', 
 				success : function(responseData, status, xhttp) {
-					// div#resultBoxへ結果(HTML)を反映
-					alert(responseData.toString());
+					$("#ppap").text(responseData.toString());
 				},
 				error : function(XMLHttpRequest, status, errorThrown) {
 					// エラー処理
-					alert(XMLHttpRequest.toString());
+					alert(XMLHttpRequest.responseText);
+				}
+			});
+		});
+		
+		$("#concat_btn").click(function(){
+			var data = {
+					"value1":"aaa"
+					,"value2":"bbb"
+					};
+			$.ajax({
+				type : "POST",
+				url : "ajax/concat",
+				data : JSON.stringify(data),
+				dataType : "json",
+				contentType: 'application/json', 
+				success : function(responseData, status, xhttp) {
+					$("#concat").text(responseData.toString());
+				},
+				error : function(XMLHttpRequest, status, errorThrown) {
+					// エラー処理
+					alert(XMLHttpRequest.responseText);
 				}
 			});
 		});
@@ -34,5 +54,9 @@
 </script>
 
 	<button id="ppap_btn">PPAP</button>
+	<h1 id="ppap"></h1>
+	<br/>
+	<button id="concat_btn">concat</button>
+	<h1 id="concat"></h1>
 </body>
 </html>

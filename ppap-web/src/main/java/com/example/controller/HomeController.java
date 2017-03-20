@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-
 @EnableDiscoveryClient
 @Controller
 @EnableCircuitBreaker
@@ -25,14 +23,4 @@ public class HomeController {
 		return "home/index";
 	}
 
-	@HystrixCommand(fallbackMethod = "error")
-	public String hello() {
-		String result = restTemplate.getForObject("http://ppap-service", String.class);
-
-		return result + "from";
-	}
-
-	public String error() {
-		return "ppap-service is DOWN!!";
-	}
 }
